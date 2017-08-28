@@ -1,0 +1,146 @@
+format_version: '2'
+name: PWM_Led
+board:
+  identifier: ATtiny817XplainedMini
+  device: ATtiny817-MNR
+details: null
+application: null
+middlewares: {}
+drivers:
+  CLKCTRL:
+    user_label: CLKCTRL
+    definition: Atmel:ATtiny417_81x_161x_321x_drivers:1.0.0::ATtiny817-MNR::CLKCTRL::driver_config_definition::CLKCTRL::Drivers:CLKCTRL:Init
+    functionality: System
+    api: Drivers:CLKCTRL:Init
+    configuration:
+      clkctrl_mclkctrla_cksel: 20MHz Internal Oscillator (OSC20M)
+      clkctrl_mclkctrla_clkout: false
+      clkctrl_mclkctrlb_pdiv: '6'
+      clkctrl_mclkctrlb_pen: true
+      clkctrl_mclklock_locken: false
+      clkctrl_osc20mctrla_runstdby: false
+      clkctrl_osc32kctrla_runstdby: false
+      clkctrl_xosc32kctrla_csut: 1k cycles
+      clkctrl_xosc32kctrla_runstdby: false
+      clkctrl_xosc32kctrla_sel: false
+      cpu_clock_source: Main Clock (CLK_MAIN)
+      enable_clk_per: true
+      enable_extclk: true
+      enable_main: true
+      enable_osc20m: true
+      enable_osculp1k: true
+      enable_osculp32k: true
+      enable_tcd0: true
+      enable_xosc32kctrla: false
+      extosc: 32678
+      nvm_clock_source: Main Clock (CLK_MAIN)
+      osculp1k_clksel_clksel: 32KHz Internal Ultra Low Power Oscillator (OSCULP32K)
+      ram_clock_source: Main Clock (CLK_MAIN)
+      tcd0_ctrla_clksel: 20MHz Internal Oscillator (OSC20M)
+      tcd0_ctrla_syncpres: '1'
+      xosc32kctrla_arch_enable: false
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: CPU
+          input: CPU
+        configuration: {}
+  PWM_0:
+    user_label: PWM_0
+    definition: Atmel:ATtiny417_81x_161x_321x_drivers:1.0.0::ATtiny817-MNR::TCB0::driver_config_definition::Single.Slope.~28Fast~29.Programmable.TOP::Drivers:PWM:Basic
+    functionality: PWM
+    api: Drivers:PWM:Basic
+    configuration:
+      callback_rate: 0
+      inc_overflow_irq: true
+      tcb_ccmph: 100
+      tcb_ccmpl: 255
+      tcb_cnt: 0
+      tcb_ctrla_clksel: CLK_PER (No Prescaling)
+      tcb_ctrla_enable: true
+      tcb_ctrla_runstdby: false
+      tcb_ctrla_syncupd: false
+      tcb_ctrlb_async: false
+      tcb_ctrlb_ccmpen: true
+      tcb_ctrlb_ccmpinit: false
+      tcb_ctrlb_cntmode: 8-bit PWM
+      tcb_dbgctrl_dbgrun: false
+      tcb_evctrl_captei: false
+      tcb_evctrl_edge: false
+      tcb_evctrl_filter: false
+      tcb_intctrl_capt: false
+    optional_signals:
+    - identifier: PWM_0:WO/0
+      pad: PC0
+      mode: Enable
+      configuration: null
+      definition: Atmel:ATtiny417_81x_161x_321x_drivers:1.0.0::ATtiny817-MNR::optional_signal_definition::TCB0.WO.0
+      name: TCB0/WO/0
+      label: WO/0
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: TCB
+          input: Main Clock (CLK_MAIN)
+        configuration:
+          tcb_clock_source: Main Clock (CLK_MAIN)
+  CPUINT:
+    user_label: CPUINT
+    definition: Atmel:ATtiny417_81x_161x_321x_drivers:1.0.0::ATtiny817-MNR::CPUINT::driver_config_definition::CPUINT::Drivers:CPUINT:Init
+    functionality: System
+    api: Drivers:CPUINT:Init
+    configuration:
+      cpuint_ctrla_cvt: false
+      cpuint_ctrla_ivsel: false
+      cpuint_ctrla_lvl0rr: false
+      cpuint_global_interrupt: false
+      cpuint_lvl0pri_lvl0pri: 0
+      cpuint_lvl1vec_lvl1vec: 0
+      inc_isr_harness: false
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group: null
+  SLPCTRL:
+    user_label: SLPCTRL
+    definition: Atmel:ATtiny417_81x_161x_321x_drivers:1.0.0::ATtiny817-MNR::SLPCTRL::driver_config_definition::SLPCTRL::Drivers:SLPCTRL:Init
+    functionality: System
+    api: Drivers:SLPCTRL:Init
+    configuration:
+      slpctrl_ctrla_sen: false
+      slpctrl_ctrla_smode: Idle mode
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group: null
+  BOD:
+    user_label: BOD
+    definition: Atmel:ATtiny417_81x_161x_321x_drivers:1.0.0::ATtiny817-MNR::BOD::driver_config_definition::BOD::Drivers:BOD:Init
+    functionality: System
+    api: Drivers:BOD:Init
+    configuration:
+      bod_ctrla_sleep: Disabled
+      bod_intctrl_vlmcfg: Interrupt when supply goes above VLM level
+      bod_intctrl_vlmie: false
+      bod_vlmctrla_vlmlvl: VLM threshold 5% above BOD level
+      inc_isr_harness: false
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: BOD
+          input: 32KHz divided by 32
+        configuration:
+          bod_clock_source: 32KHz divided by 32
+pads:
+  PC0:
+    name: PC0
+    definition: Atmel:ATtiny417_81x_161x_321x_drivers:1.0.0::ATtiny817-MNR::pad::PC0
+    mode: Digital output
+    user_label: PC0
+    configuration: null
+toolchain_options: []
